@@ -2,9 +2,19 @@
 
 A place to host metadata about the monthly recordings we're doing.
 
+## Use
+
+You need to have node installed and a local copy of the recordings folder from dropbox.
+
+```bash
+npm install .
+# this generates the site's html
+node ./generate.js
+```
+
 ## Architecture
 
-A static site hosted with [github pages](https://pages.github.com/).
+A static site hosted with [github pages](https://pages.github.com/), the site content is under `PLS/*`.
 
 We assume that for each mix there is a audio file recording and a [cue](https://en.wikipedia.org/wiki/Cue_sheet_(computing)#Essential_commands) file listing the tracks used.
 
@@ -20,6 +30,8 @@ Dropbox itself provides the audio player for playing them at the link location.
 
 ### TODO
 
+* remove hardcoded machine specific file paths
+* setup custom domain name
 * Autogenerate (and revoke) links
   * there is an API to do this
   * https://www.dropbox.com/developers/documentation/http/documentation#sharing-get_shared_link_file
