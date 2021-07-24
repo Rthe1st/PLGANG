@@ -1,0 +1,7 @@
+# this is a list of the links to the recordings
+# of the form:
+# {
+#     "$filename": "https://www.dropbox.com/s/XXXXXXX/$filename?dl=0",
+#     ...
+# }
+plaintext_links.json

@@ -1,0 +1,16 @@
+{
+  "name": "plgang",
+  "version": "1.0.0",
+  "description": "A place to host metadata about the monthly recordings we're doing.",
+  "main": "generate.js",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "cue-parser": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

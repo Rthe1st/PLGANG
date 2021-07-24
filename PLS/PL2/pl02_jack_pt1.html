@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+        function decryptRecording(password){
+            encryptedLink = "U2FsdGVkX19elLWnJYivNJCA1KgNDS2NrfJt98XUPx2XraimY5QPBk+TR7OxWNIoZ31qwjuupLg2JHrXZELxvTzGVLWlKSVvW2ol7kJBihaiTL/8zg6eJMNrwqcYR462"
+            let decrypted;
+            try{
+                decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
+            }catch{
+                decrypted = null;
+            }
+            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+                return null;
+            }else{
+                document.getElementById("decrypt").hidden = true;
+                window.localStorage.setItem('password', password);
+                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").hidden = false
+                return decrypted;
+            }
+        }
+
+        function goToRecording(event){
+            let password = document.getElementById("password").value;
+            let decryptedLink = decryptRecording(password);
+            if(decryptedLink == null){
+                alert("wrong password")
+            }
+            event.preventDefault();
+        }
+        window.onload = function(){
+            let password = localStorage.getItem('password');
+            if(password != null){
+                let decryptedLink = decryptRecording(password)
+                if(decryptedLink == null){
+                    localStorage.removeItem('password')
+                }
+            }
+            document.getElementById("decrypt").addEventListener('submit', goToRecording);
+        }
+        </script>
+    </head>
+    <body>
+        <h1>pl02_jack_pt1</h1>
+        <a id="recording" href="" hidden>Recording</a>
+        <form id="decrypt">
+            <input id="password" type="text">
+            <button type="submit">Unlock recording</button>
+        </form>
+        <h2>Track list</h2>
+        <ol><li>Pacific 202 (audio only) by 808 State - 00:00</li><li>Love Can't Turn Around by Farley Jackmaster Funk - 05:17</li><li>Everywhere (Official Music Video) (1) by Fleetwood Mac - 10:15</li><li>I wanna Give You Devotion (Original Mix) (HQ) by Nomad - 13:29</li><li>Pump Up The Jam (Official Music Video) by Technotronic - 18:37</li><li>The Party (Jamie Lewis Remix) - 22:12</li></ol>
+    </body>
+</html>
