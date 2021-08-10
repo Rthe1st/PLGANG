@@ -6,7 +6,7 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "$encryptedLink"
+            encryptedLink = "U2FsdGVkX1+YXB5R9ZgdwRSz6XxnyDLbnzawl6mq44khhGpLT90jDkB3KrAVy6Y29s2V0r923J0wUGLxfCBVeZZysxjK4GO1J7wXAm7+FWLpxgE2Lk83+PJUYUt58grR"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,7 +45,7 @@
         </script>
     </head>
     <body>
-        <h1>$name</h1>
+        <h1>pl03_laura</h1>
         <audio id="recording" hidden controls>
                 Your browser does not support the
                 <code>audio</code> element.
@@ -55,6 +55,6 @@
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        $trackList
+        <ol><li>%20Roll%20The%20Dice by Shy%20Fx%20x%20Stamina%20MC%20x%20Lilly%20Allen%20 - 00:00</li><li>Incredible - 03:15</li><li>%20Original%20Nuttah%2025%20(Chase%20%26%20Status%20Remix%20ft.%20Irah) by UK%20Apache%20with%20Shy%20FX%20 - 04:26</li><li>Heater - 06:40</li><li>%20Last%20Jungle by Sub%20Focus%20 - 07:41</li><li>%20Endorphins%20(Ft.%20Alex%20Clare)%20(Sub%20Focus%20vs%20Fred%20V%20%26%20Grafix%20Remix) by Sub%20Focus%20 - 09:45</li><li>%20Better%20Off%20Without%20You%20(High%20Contrast%20Remix) by Becky%20Hill%20ft.%20Shift%20K3Y%20 - 12:08</li><li>%20Afterglow by Wilkinson%20 - 14:11</li><li>%20The%20One%20(High%20Contrast%20Remix) by Jorja%20Smith%20 - 15:22</li><li>%20Afterglow by Wilkinson%20 - 15:32</li><li>%20The%20One%20(High%20Contrast%20Remix) by Jorja%20Smith%20 - 15:43</li><li>%20Nobody%20To%20Love%20(Official%20Video)%20HD by Sigma%20 - 16:55</li></ol>
     </body>
 </html>

@@ -1,0 +1,16 @@
+#poster {
+    object-fit: scale-down;
+    flex-basis: 1;
+    flex-grow: 0;
+    max-width: 30%;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#list {
+    flex-basis: fill;
+}

@@ -6,7 +6,7 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "$encryptedLink"
+            encryptedLink = "U2FsdGVkX1/hZng4GVEh+/nTIuKyi85Iw/r3W1aIVUO2cQ2CoqMzJNYWFCC0t2equkIazAHY1Ylj8JlT86jKyG7ho1uhbs8Dl/iKRr1zf32uQMdPIaKXcNTJZvpsnhja"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,7 +45,7 @@
         </script>
     </head>
     <body>
-        <h1>$name</h1>
+        <h1>pl02_richard</h1>
         <audio id="recording" hidden controls>
                 Your browser does not support the
                 <code>audio</code> element.
@@ -55,6 +55,6 @@
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        $trackList
+        <ol><li>Straight out the Jungle by Jungle Brothers - 00:00</li><li>What's Going On by Jungle Brothers - 00:20</li><li>Shake Your Rump (2009 Digital Remaster) 2009 Digital Remaster by Beastie Boys - 01:31</li><li>Paul Revere by The Beastie Boys - 03:34</li><li>Boing Boom Tschak (2009 Remaster) 2009 Remaster by Kraftwerk - 04:46</li><li>House Phone (2009 Remaster) 2009 Remaster by Kraftwerk - 06:08</li><li>Bamboo Houses by David Sylvian, Ryuichi Sakamoto - 08:22</li><li>U-T by Yellow Magic Orchestra - 13:17</li><li>Pocket Calculator (2009 Remastered Version) 2009 Remastered Version by Kraftwerk - 14:49</li><li>Don't Make Me Wait (7 by BOMB THE BASS - 17:03</li><li>Acid Tracks by Phuture - 19:57</li><li>Is It All Over My Face? (Female Version) Female Version by Loose Joints - 22:42</li></ol>
     </body>
 </html>

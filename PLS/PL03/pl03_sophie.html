@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1/lyGTrYktAFGE4WOM1tCy7eRgMAG9+O8JKg6PJ4u46MYgeLvRGxKFUoEB6UqeLd0YUQwCfIiIse3OTq9s8xuBD88MZIjwtz3E="
+            encryptedLink = "U2FsdGVkX1927LJ0h35f/bT3yeksex/3l3tOAKDtJ/hR2lmGnydxJsf+SL/gGRl5ZBo+7s7PD67nwq68Akh2K/PJSkgI3N6anXXOcpofGRD0Wmp5pi9I1cEDj/XzV+C/"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -45,13 +45,16 @@
         </script>
     </head>
     <body>
-        <h1>pl02_chris</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <h1>pl03_sophie</h1>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        <ol><li>Three Little Birds (Official Video) by Bob Marley & The Wailers - 00:00</li><li>Murderer by Barrington Levy - 03:04</li><li>World A Music, 1983 (original version) by Ini Kamoze - 06:39</li><li>Night Nurse by Gregory Isaacs - 12:06</li><li>Mr Marshall - 16:02</li></ol>
+        <ol><li>5307067 Nobody To Love (Extended Mix) - 00:00</li><li>54228 Slam (Original Mix) - 03:24</li><li>12957420 Shake Ur Body (feat. Di) (Original Mix) - 08:52</li><li>15405340 Where's Your Head At (1991 Remix) - 12:17</li><li>9821492 Ruffest Gunark (Chase & Status Remix) - 15:53</li><li>3408233 No Problem (Original Mix) - 20:20</li></ol>
     </body>
 </html>

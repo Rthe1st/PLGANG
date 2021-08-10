@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1+RoudG2PvxOOW/YUYctUMX2ewor4LZ9J/IBVvR9nqMryzzccEqUjKeW4rIrqQcv43hXhdR5H+V8/pJhWDbzlfuBVkuSd/Hao8="
+            encryptedLink = "U2FsdGVkX1/AZuezszswLHW0NnEpQ3vPI4HRkS1ddmWQUfRL5Q6kxR3mT+ka7uP3Fi0lJdMRn9Efy4siN9AlHRyizyr17qOLPDClmtSi8d5+Z4qN+WYCBe+NnxyXVAdI"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -45,13 +45,16 @@
         </script>
     </head>
     <body>
-        <h1>pl02_laura</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <h1>pl03_richard</h1>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        <ol><li>Beat It [Audio HQ] HD by Michael Jackson - 00:00</li><li>Rock the Casbah (Remastered) - 01:52</li><li>Pass The Dutchie - 03:45</li><li>One In Ten (Dub Version) - 05:28</li><li>The Killing Moon (Official Music Video) by Echo & The Bunnymen - 07:21</li><li>Tainted Love - 09:45</li><li>Could You Be Loved (HQ) by Bob Marley - 10:56</li><li>Kingston Town by UB40 - 13:51</li><li>Everywhere (Official Music Video) by Fleetwood Mac - 15:03</li><li>I Want Your Love by Chic - 16:04</li></ol>
+        <ol><li>The Doll (LCY Remix) by audiobooks, LCY, Bruise, - 00:00</li><li>2-01 Tessela - Hackney Parrot (Special Request VIP) - 01:03</li><li>Octa4 by Paradox - 03:48</li><li>Going In by Sam Interface - 05:50</li><li>In My Mind by K-65 - 07:13</li><li>Doc Zee - See U Again Dub by Dred Collective - 09:47</li><li>DOUBLE SICKO by Special Request - 11:29</li><li>Elysian Fields (Tim Reaper Remix) by Special Request x Tim Reaper - 13:21</li><li>Inside by Private Caller - 15:35</li><li>Durban Poison by Babylon Timewarp - 17:07</li><li>Special Dedication by DJ Nut Nut feat Top Cat - 18:09</li><li>Follow Me (Skeptical Remix) by Steve Spacek - 20:12</li><li>Stevie Hyper D - Junglist Soldier-ryX3E65HOjg (480p rip) - 23:17</li><li>This World (CLIPZ Remix) by Everything is Recorded & CLIPZ feat. Maria Somerville, Infinite Coles - 27:44</li></ol>
     </body>
 </html>

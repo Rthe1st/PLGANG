@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1+CFtaFWZWgWViki9FvmiTdJrsDE8GgTuMB4qgj0AiuRYcICTceaS7xrEx2IJnVI0w0+vH/wI1TYiJrjuVopYLV1miuI2Im08I="
+            encryptedLink = "U2FsdGVkX19pfFiJRsyC7IJl+bZdGOFqH1YOEquVXb+xrIddhMaBStNxnk5EtTxUi1AbDQlx7KcOjsbHTzUMMwgQcsGHvHoqWe+HCnTxln+D19RHV+qnShWMSZMakD16"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -45,13 +45,16 @@
         </script>
     </head>
     <body>
-        <h1>pl02_max</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <h1>pl02_sophie</h1>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        <ol><li>smWVKR LYjs by John Holt   Police In Helicopter - 00:00</li><li>Planet Rock by Afrika Bambaataa And The Soulsonic Force - 03:36</li><li>Kraftwerk - Tour de France [Original Version, 1984] HD-LTZyXlLhvxs - 09:55</li><li>A Guy Called Gerald - Voodoo Ray (OFFICIAL MUSIC VIDEO)-j7vxHOCeiQ4 - 16:35</li><li>808 State - Pacific State-6jQ bOP0HfY - 20:52</li></ol>
+        <ol><li>Bam Bam by Sister Nancy - 00:00</li><li>Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ - 03:14</li><li>Murder She Wrote by Chaka Demus & Pliers - 06:39</li><li>The Jam - Town Called Malice (Official Video)-YfpRm-p7qlY - 10:37</li></ol>
     </body>
 </html>

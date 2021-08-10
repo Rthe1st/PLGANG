@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1+BOvHPs+uRSHN2CGiahVsp6nB9BFkOi1HiFji3wxmpAbQiGyCtNQZGQuLwOZ/9YwJLYkynoOQDLrOoru2Pgw8tbCYTU7Y8CHY="
+            encryptedLink = "U2FsdGVkX18q/vWZw4oMlNoEdkYgEztOq2dIXnToV+5f5LghwaX4WdOKl6ukrXGzPIkEEf8Ks6wSmEcMu6VAtSKhMpPeT4TpI2M1wWovZq9OjYUWtHVB4b18hCdZ0XOk"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -45,13 +45,16 @@
         </script>
     </head>
     <body>
-        <h1>pl02_sophie</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <h1>pl03_chris</h1>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        <ol><li>Bam Bam by Sister Nancy - 00:00</li><li>Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ - 03:14</li><li>Murder She Wrote by Chaka Demus & Pliers - 06:39</li><li>The Jam - Town Called Malice (Official Video)-YfpRm-p7qlY - 10:37</li></ol>
+        <ol><li>11632572 The Lighter (Original Mix) - 00:00</li><li>5237685 Hard (Original Mix) - 03:45</li><li>9117580 Light Up (The World) (Benny Page Remix) - 07:21</li><li>40370 Original Junglesound (Switch Mix) - 10:46</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 18:00</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 24:53</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 28:49</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 29:51</li></ol>
     </body>
 </html>

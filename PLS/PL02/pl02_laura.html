@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX19elLWnJYivNJCA1KgNDS2NrfJt98XUPx2XraimY5QPBk+TR7OxWNIoZ31qwjuupLg2JHrXZELxvTzGVLWlKSVvW2ol7kJBihaiTL/8zg6eJMNrwqcYR462"
+            encryptedLink = "U2FsdGVkX19htimV4svka4FwXyJkQqUqUi/pG0YWZ3Q1OBrl0pkTnsOyyjHDi0ikmZSjAlNV7ATW1WX12qAfbBv9yzwyq2C7KvmsSKOGiiZ4JHPYthFd6Z3jCKzTi1zq"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -45,13 +45,16 @@
         </script>
     </head>
     <body>
-        <h1>pl02_jack_pt1</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <h1>pl02_laura</h1>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
         </form>
         <h2>Track list</h2>
-        <ol><li>Pacific 202 (audio only) by 808 State - 00:00</li><li>Love Can't Turn Around by Farley Jackmaster Funk - 05:17</li><li>Everywhere (Official Music Video) (1) by Fleetwood Mac - 10:15</li><li>I wanna Give You Devotion (Original Mix) (HQ) by Nomad - 13:29</li><li>Pump Up The Jam (Official Music Video) by Technotronic - 18:37</li><li>The Party (Jamie Lewis Remix) - 22:12</li></ol>
+        <ol><li>Beat It [Audio HQ] HD by Michael Jackson - 00:00</li><li>Rock the Casbah (Remastered) - 01:52</li><li>Pass The Dutchie - 03:45</li><li>One In Ten (Dub Version) - 05:28</li><li>The Killing Moon (Official Music Video) by Echo & The Bunnymen - 07:21</li><li>Tainted Love - 09:45</li><li>Could You Be Loved (HQ) by Bob Marley - 10:56</li><li>Kingston Town by UB40 - 13:51</li><li>Everywhere (Official Music Video) by Fleetwood Mac - 15:03</li><li>I Want Your Love by Chic - 16:04</li></ol>
     </body>
 </html>

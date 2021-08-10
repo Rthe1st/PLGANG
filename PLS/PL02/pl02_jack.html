@@ -6,19 +6,19 @@
 <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1/ABL79n4zJCrI/GI3kCPNA/rVvzx78Y8v2dk9w3QicXmctvGEGa3tX6u9oat1ZxzpSPeX7XZMEM4w55bENIJBudUuBOx20sMI="
+            encryptedLink = "U2FsdGVkX18/Ap9SdxxgCvFAnvSLFTDYtc93ocM7qSf09SRAigFm7HDQpn8yhzYASIkgqVre3ZHeAUtuC2RKB5HKDYFKfxMGSiGIWLQ4XvDVDAhf4b2jBQG1BpRVUiBc"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
             }catch{
                 decrypted = null;
             }
-            if(decrypted != null && !decrypted.startsWith("https://www.dropbox.com/")){
+            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
                 return null;
             }else{
                 document.getElementById("decrypt").hidden = true;
                 window.localStorage.setItem('password', password);
-                document.getElementById("recording").href = decrypted
+                document.getElementById("recording").src = decrypted
                 document.getElementById("recording").hidden = false
                 return decrypted;
             }
@@ -46,7 +46,10 @@
     </head>
     <body>
         <h1>pl02_jack</h1>
-        <a id="recording" href="" hidden>Recording</a>
+        <audio id="recording" hidden controls>
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
         <form id="decrypt">
             <input id="password" type="text">
             <button type="submit">Unlock recording</button>
