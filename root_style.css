@@ -1,0 +1,43 @@
+body {
+    background-color: white;
+    font-family: 'Open Sans', sans-serif;
+    /* color: whitesmoke; */
+}
+a {
+    color: unset;
+}
+
+ul {
+    list-style: none;
+    text-align: center;
+    padding-left: 0%;
+}
+
+li {
+    flex-grow: 1;
+}
+
+#cone {
+    width: 100%;
+}
+
+#left {
+    position: absolute;
+    background-color: white;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    top: 0;
+    text-align: center;
+    width: 50%;
+    border-top-width: 2em;
+    border-bottom-width: 2em;
+    border-left-width: 0.2em;
+    border-right-width: 0.2em;
+    border-color: black;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    /* transform: make it a paralleogram; */
+}

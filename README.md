@@ -12,6 +12,9 @@ npm install .
 node ./generate.js
 ```
 
+For the canvas code to work locally, you need to disable CORS
+https://stackoverflow.com/a/18495435
+
 ## Architecture
 
 A static site hosted with [github pages](https://pages.github.com/), the site content is under `PLS/*`.
@@ -31,7 +34,6 @@ The links are encrypted before being included in the static site and javascript 
 * remove hardcoded machine specific file paths
 * setup custom domain name
 * use signed links instead of public ones so we can expire them
-* Auto generate folder per-night (PL01, PL02, PL03, etc)
 * styling, make it all pretty
   * including better cue file display
 * do the crypto better

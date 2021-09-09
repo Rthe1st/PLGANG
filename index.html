@@ -1,14 +1,84 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="./root_style.css" rel="stylesheet">
+    <script>
+
+        let a = 150;
+        let forwards = true;
+        var img1 = new Image();
+
+        function animate(){
+            ctx.drawImage(img1, 0, 0);
+            const imageData = ctx.getImageData(0, 0, 657, 657);
+            const data = imageData.data;
+            for (var i = 0; i < data.length; i += 4) {
+                // 0 = red, 1 = green, 2 = blue
+                for(var color = 0; color < 3; color +=1){
+                    if(data[i+color] < a){
+                        data[i+color] = 100;
+                    }else{
+                        data[i+color] = 145;
+                    }
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+            if(forwards){
+                a += 1;
+            }else{
+                a -= 1;
+            }
+
+            if(a > 240){
+                forwards = false;
+            }
+            if(a < 150){
+                forwards = true;
+            }
+            window.setTimeout(animate, 100)
+        }
+
+        function Test1() {
+            var canvas = document.getElementById('cone');
+            if (canvas.getContext) {
+
+                ctx = canvas.getContext('2d');
+
+                img1.src = './cone.png';
+                // img1.crossOrigin = "anonymous";
+                img1.onload = function () {
+                    //draw background image
+
+                    //todo: animate by applying a black/white color threshold
+                    // annd looping it increasing/decreasing
+                    // use animate frame instead
+                    window.setTimeout(animate, 100)
+                };
+            }
+        }
+        window.onload = Test1;
+    </script>
 </head>
 
 <body>
-    <h1>PLGANG</h1>
-    <ol id="list">
-        <li><a href="./PLS/PL02/index.html">PL02 - 80s</a></li>
-        <li><a href="./PLS/PL03/index.html">PL03 - Jungle / DnB</a></li>
-    </ol>
+    <canvas id="cone" width="657px" height="657px"></canvas>
+    <div id="left">
+        <div id="title">
+            <p>plgangplgangplangplgang</p>
+            <h1>PLGANG</h1>
+            <p>plgangplgangplangplgang</p>
+        </div>
+        <ul>
+            <li><a href="./PLS/PL02/index.html">PL02 - 80s</a></li>
+            <li><a href="./PLS/PL03/index.html">PL03 - Jungle / DnB</a></li>
+        </ul>
+    </div>
+
 </body>
 
 </html>

@@ -68,5 +68,9 @@ function folderIndexes(){
     }
 }
 
+let rootFolder = "./PLS"
+if(!fs.existsSync(rootFolder)){
+    fs.mkdirSync(rootFolder)
+}
 generate()
 folderIndexes()
