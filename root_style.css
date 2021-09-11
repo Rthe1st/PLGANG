@@ -18,9 +18,19 @@ li {
     flex-grow: 1;
 }
 
-#cone {
-    width:100vw;
+@media (orientation:landscape){
+    #cone {
+        width:100vw;
+    }
 }
+
+@media (orientation:portrait){
+    #cone {
+        height:100vh;
+    }
+}
+
+
 
 #left {
     position: absolute;
