@@ -1,7 +1,8 @@
 body {
     background-color: white;
     font-family: 'Open Sans', sans-serif;
-    /* color: whitesmoke; */
+    margin: 0px;
+    color: black;
 }
 a {
     color: unset;
@@ -18,7 +19,7 @@ li {
 }
 
 #cone {
-    width: 100%;
+    width:100vw;
 }
 
 #left {

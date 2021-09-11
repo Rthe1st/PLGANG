@@ -9,18 +9,22 @@
     <link href="./root_style.css" rel="stylesheet">
     <script>
 
-        let a = 150;
+        let threshold = 150;
         let forwards = true;
         var img1 = new Image();
 
-        function animate(){
+        let previousTimestamp = performance.now();
+
+        function animate(timestamp){
+            let timeElapsed = timestamp - previousTimestamp;
+            previousTimestamp = timestamp;
             ctx.drawImage(img1, 0, 0);
             const imageData = ctx.getImageData(0, 0, 657, 657);
             const data = imageData.data;
             for (var i = 0; i < data.length; i += 4) {
                 // 0 = red, 1 = green, 2 = blue
                 for(var color = 0; color < 3; color +=1){
-                    if(data[i+color] < a){
+                    if(data[i+color] < threshold){
                         data[i+color] = 100;
                     }else{
                         data[i+color] = 145;
@@ -28,40 +32,34 @@
                 }
             }
             ctx.putImageData(imageData, 0, 0);
-            if(forwards){
-                a += 1;
-            }else{
-                a -= 1;
+
+            let thresholdChange = timeElapsed / 100; 
+            let changeDirection = 1;
+            if(!forwards){
+                changeDirection = -1;
             }
 
-            if(a > 240){
+            threshold += changeDirection * thresholdChange;
+
+            if(threshold > 240){
                 forwards = false;
             }
-            if(a < 150){
+            if(threshold < 150){
                 forwards = true;
             }
-            window.setTimeout(animate, 100)
+            window.requestAnimationFrame(animate)
         }
 
-        function Test1() {
+        window.onload = () => {
             var canvas = document.getElementById('cone');
             if (canvas.getContext) {
-
                 ctx = canvas.getContext('2d');
-
                 img1.src = './cone.png';
-                // img1.crossOrigin = "anonymous";
                 img1.onload = function () {
-                    //draw background image
-
-                    //todo: animate by applying a black/white color threshold
-                    // annd looping it increasing/decreasing
-                    // use animate frame instead
-                    window.setTimeout(animate, 100)
+                    window.requestAnimationFrame(animate)
                 };
             }
         }
-        window.onload = Test1;
     </script>
 </head>
 
