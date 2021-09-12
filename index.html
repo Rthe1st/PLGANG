@@ -8,7 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <link href="./root_style.css" rel="stylesheet">
     <script>
+        function subImage(){
+            let cone = document.getElementById("cone")
+            let width = cone.offsetWidth;
+            let height = cone.offsetHeight;
+            cone.width = width
+            cone.height = height
+            return [width, height]
+        }
 
+
+        let ctx;
         let threshold = 150;
         let forwards = true;
         var img1 = new Image();
@@ -18,8 +28,17 @@
         function animate(timestamp){
             let timeElapsed = timestamp - previousTimestamp;
             previousTimestamp = timestamp;
-            ctx.drawImage(img1, 0, 0);
-            const imageData = ctx.getImageData(0, 0, 657, 657);
+            let [coneWidth, coneHeight] = subImage()
+            if(coneWidth < coneHeight){
+                let ratio = coneWidth/coneHeight
+                ctx.drawImage(img1, 0, 0, img1.width * ratio, img1.height, 0, 0, coneWidth, coneHeight)
+            }else{
+                let ratio = coneHeight/coneWidth
+                ctx.drawImage(img1, 0, 0, img1.width, img1.height * ratio, 0, 0, coneWidth, coneHeight)
+            }
+            // this is silly, can we not pass the image data directly
+            // without writting to the canvas first
+            const imageData = ctx.getImageData(0, 0, coneWidth, coneHeight);
             const data = imageData.data;
             for (var i = 0; i < data.length; i += 4) {
                 // 0 = red, 1 = green, 2 = blue
@@ -64,7 +83,8 @@
 </head>
 
 <body>
-    <canvas id="cone" width="657px" height="657px"></canvas>
+    <!-- width="657px" height="657px" -->
+    <canvas id="cone"></canvas>
     <div id="left">
         <div id="title">
             <p>plgangplgangplangplgang</p>
