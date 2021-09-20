@@ -18,6 +18,28 @@
             return [width, height]
         }
 
+        let imageData;
+        let coneWidth;
+        let coneHeight;
+        let dataCache;
+        function imageSetup(){
+            [coneWidth, coneHeight] = subImage()
+            if(coneWidth < coneHeight){
+                let ratio = coneWidth/coneHeight
+                ctx.drawImage(img1, 0, 0, img1.width * ratio, img1.height, 0, 0, coneWidth, coneHeight)
+            }else{
+                let ratio = coneHeight/coneWidth
+                ctx.drawImage(img1, 0, 0, img1.width, img1.height * ratio, 0, 0, coneWidth, coneHeight)
+            }
+            imageData = ctx.getImageData(0, 0, coneWidth, coneHeight);
+            dataCache = new Uint8ClampedArray(imageData.data)
+        }
+
+
+        window.addEventListener("orientationchange", function() {
+            imageSetup()
+        });
+
         let controls = {
             low: 0,
             high: 52,
@@ -38,23 +60,18 @@
 
         let previousTimestamp = performance.now();
         let color = 0;
+        let thresholdChange = 0
         function animate(timestamp){
             let timeElapsed = timestamp - previousTimestamp;
             previousTimestamp = timestamp;
-            let [coneWidth, coneHeight] = subImage()
-            if(coneWidth < coneHeight){
-                let ratio = coneWidth/coneHeight
-                ctx.drawImage(img1, 0, 0, img1.width * ratio, img1.height, 0, 0, coneWidth, coneHeight)
-            }else{
-                let ratio = coneHeight/coneWidth
-                ctx.drawImage(img1, 0, 0, img1.width, img1.height * ratio, 0, 0, coneWidth, coneHeight)
+            thresholdChange += timeElapsed / controls.speed;
+            if(thresholdChange < 1){
+                window.requestAnimationFrame(animate)
+                return
             }
-            // this is silly, can we not pass the image data directly
-            // without writting to the canvas first
-            const imageData = ctx.getImageData(0, 0, coneWidth, coneHeight);
-            const data = imageData.data;
+            imageData.data.set(dataCache)
+            let data = imageData.data;
             for (var i = 0; i < data.length; i += 4) {
-
                 // 0 = red, 1 = green, 2 = blue
                 if(data[i+color] < threshold){
                     data[i+color] -= Math.max(controls.low * (1-threshold/controls.threshold_upper_bound), 0);
@@ -72,13 +89,16 @@
             }
             ctx.putImageData(imageData, 0, 0);
 
-            let thresholdChange = timeElapsed / controls.speed; 
             let changeDirection = 1;
             if(!forwards){
                 changeDirection = -1;
             }
 
             threshold += changeDirection * thresholdChange;
+
+            if(thresholdChange > 1){
+                thresholdChange -= 1;
+            }
 
             if(threshold >= controls.threshold_upper_bound){
                 color = Math.floor(Math.random() *3)
@@ -105,6 +125,7 @@
                 ctx = canvas.getContext('2d');
                 img1.src = './cone_blur.png';
                 img1.onload = function () {
+                    imageSetup()
                     window.requestAnimationFrame(animate)
                 };
             }
