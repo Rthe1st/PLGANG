@@ -1,6 +1,7 @@
 body {
     background-color: white;
     font-family: 'Open Sans', sans-serif;
+    font-style: oblique 10deg;
     margin: 0px;
     color: black;
 }
@@ -26,6 +27,7 @@ li {
 #left {
     position: absolute;
     background-color: white;
+    opacity: 0.80;
     left: 0; 
     right: 0; 
     margin-left: auto; 
