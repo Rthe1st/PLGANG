@@ -43,7 +43,7 @@
         let controls = {
             low: 0,
             high: 52,
-            speed: 96,
+            speed: 0.01,
             threshold_lower_bound: 138,
             threshold_upper_bound: 171,
             same_jump_color_upper: 174,
@@ -64,7 +64,7 @@
         function animate(timestamp){
             let timeElapsed = timestamp - previousTimestamp;
             previousTimestamp = timestamp;
-            thresholdChange += timeElapsed / controls.speed;
+            thresholdChange += timeElapsed * controls.speed;
             if(thresholdChange < 1){
                 window.requestAnimationFrame(animate)
                 return
@@ -96,9 +96,7 @@
 
             threshold += changeDirection * thresholdChange;
 
-            if(thresholdChange > 1){
-                thresholdChange -= 1;
-            }
+            thresholdChange -= Math.floor(thresholdChange);
 
             if(threshold >= controls.threshold_upper_bound){
                 color = Math.floor(Math.random() *3)
@@ -114,7 +112,7 @@
             const gui = new dat.GUI({closed:  true});
             gui.add(controls, 'low', 0, 255);
             gui.add(controls, 'high', 0, 255);
-            gui.add(controls, 'speed', 0, 500);
+            gui.add(controls, 'speed', 0, 0.5);
             gui.add(controls, 'threshold_upper_bound', 0, 255);
             gui.add(controls, 'threshold_lower_bound', 0, 255);
             gui.add(controls, 'noise', true);
