@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX19yyAiB5geGXEXRR9ZMsx3ah8qSib6OgJxrboby1akuTOxaNWsoAptoIIvVuk1lTchNHzNmPJkcjmV1ERFAQSJtlZa+WdPRGh5CAbEHxqQ+h9MAHGCFC3Mf"
+            encryptedLink = "U2FsdGVkX1/Wa2Sj8DesGepIkNSgV6tQIP+fBMKHxQVXZ3YTFhvUYlvthWFZa5z1rEa2mb8uqCBYApJuXt8WybpYYtrmfI7b/OgJ4HuvTjI8Rt7xlXoNwftqG0sGQNdb"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_jack_pt1</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>Pacific 202 (audio only) by 808 State - 00:00</li><li>Love Can't Turn Around by Farley Jackmaster Funk - 05:17</li><li>Everywhere (Official Music Video) (1) by Fleetwood Mac - 10:15</li><li>I wanna Give You Devotion (Original Mix) (HQ) by Nomad - 13:29</li><li>Pump Up The Jam (Official Music Video) by Technotronic - 18:37</li><li>The Party (Jamie Lewis Remix) - 22:12</li></ol>
+        <div id="content">
+            <h1>0002 - JACK_PT1</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>Pacific 202 (audio only) by 808 State - 00:00</li><li>Love Can't Turn Around by Farley Jackmaster Funk - 05:17</li><li>Everywhere (Official Music Video) (1) by Fleetwood Mac - 10:15</li><li>I wanna Give You Devotion (Original Mix) (HQ) by Nomad - 13:29</li><li>Pump Up The Jam (Official Music Video) by Technotronic - 18:37</li><li>The Party (Jamie Lewis Remix) - 22:12</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>

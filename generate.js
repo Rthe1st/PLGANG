@@ -37,13 +37,16 @@ async function generate(){
             // todo: use https://cloud.google.com/storage/docs/access-control/signed-urls
             let publicUrl = await upload.upload(recordingFolder, file)
             const password = fs.readFileSync('./password.txt', 'utf8')
+            //todo: right these somewhere so we can reuse them
             var encrypted = AES.encrypt(publicUrl, password).toString();
             
             let data = fs.readFileSync('./template.html', 'utf8')
+            let name = "00" + file.replace(".wav", "").slice(2).replace("_", " - ").toUpperCase()
             data = data
                 .replace("$encryptedLink", encrypted)
-                .replace("$name", file.replace(".wav", ""))
+                .replace("$name", name)
                 .replace("$trackList", parseCue(file))
+                .replace(/\$month/g, file.substring(0,4).toUpperCase())
             fs.writeFileSync(`${folder}/${file.replace(".wav", ".html")}`, data)
         }
     }
@@ -58,11 +61,12 @@ function folderIndexes(){
             if(page == "index.html"){
                 continue
             }
-            let name = page.slice(5, -5)
+            let name = page.slice(5, -5).toUpperCase()
             links.push(`<li><a href="./${page}">${name}</a></li>`)
         }
         let data = fs.readFileSync('./monthly_index_template.html', 'utf8')
         data = data.replace("$links", links.join(""))
+            .replace(/\$month_number/g, "00" + folder.slice(2))
             .replace(/\$month/g, folder)
         fs.writeFileSync(`./PLS/${folder}/index.html`, data)
     }

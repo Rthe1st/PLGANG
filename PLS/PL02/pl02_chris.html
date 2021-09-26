@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1/ELjzI8RfRpJ06iOcZNZygNI/89FAsheA5dML76mtxziDSXzFSpMCXmuf7oRk5NlSwUA4TszhayMpMJgMkCy5JH5MlmcYkjiIRIFjknJtIEYzoprMlPJct"
+            encryptedLink = "U2FsdGVkX18CQiiq+YCWKAbsPUz6NBaY6v23buezDqzFhkT8QrKBc7Pw2v+UL2/u1DQsBJvMf7T5EDMV54kbjk+pjJkQh2+RhrETZChXfoy9imvWl97eYrMz9a/Q7rmx"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_chris</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>Three Little Birds (Official Video) by Bob Marley & The Wailers - 00:00</li><li>Murderer by Barrington Levy - 03:04</li><li>World A Music, 1983 (original version) by Ini Kamoze - 06:39</li><li>Night Nurse by Gregory Isaacs - 12:06</li><li>Mr Marshall - 16:02</li></ol>
+        <div id="content">
+            <h1>0002 - CHRIS</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>Three Little Birds (Official Video) by Bob Marley & The Wailers - 00:00</li><li>Murderer by Barrington Levy - 03:04</li><li>World A Music, 1983 (original version) by Ini Kamoze - 06:39</li><li>Night Nurse by Gregory Isaacs - 12:06</li><li>Mr Marshall - 16:02</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>

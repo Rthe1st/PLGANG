@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX18/Ap9SdxxgCvFAnvSLFTDYtc93ocM7qSf09SRAigFm7HDQpn8yhzYASIkgqVre3ZHeAUtuC2RKB5HKDYFKfxMGSiGIWLQ4XvDVDAhf4b2jBQG1BpRVUiBc"
+            encryptedLink = "U2FsdGVkX19j/njxfi7rY2U76VM/TYMGAwXlIbaoEkUIhgUXyGLLt3LtjuHTdzPo1ogZm7lOjpBwI4gUeRKOFmcoNel6kZ4Ob6FzY99tEXbfo134idoLWle+zp8l336z"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_jack</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>Move Your Body (HQ) by Frankie Knuckles - 00:00</li><li>Inner City - Good Life - (CJ's Living Good Club Mix) - 01:52</li><li>This Is Acid (A New Dance Craze) [HD SOUND] by MAURICE - 05:07</li><li>Maniac - 06:50</li><li>Ride on Time - 10:14</li></ol>
+        <div id="content">
+            <h1>0002 - JACK</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>Move Your Body (HQ) by Frankie Knuckles - 00:00</li><li>Inner City - Good Life - (CJ's Living Good Club Mix) - 01:52</li><li>This Is Acid (A New Dance Craze) [HD SOUND] by MAURICE - 05:07</li><li>Maniac - 06:50</li><li>Ride on Time - 10:14</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>

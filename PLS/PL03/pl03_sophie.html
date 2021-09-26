@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1927LJ0h35f/bT3yeksex/3l3tOAKDtJ/hR2lmGnydxJsf+SL/gGRl5ZBo+7s7PD67nwq68Akh2K/PJSkgI3N6anXXOcpofGRD0Wmp5pi9I1cEDj/XzV+C/"
+            encryptedLink = "U2FsdGVkX18VY40lOVHBPLpbSLzZQXu4ayROl+OP4P7Ax4QXfNinQpeVU2ZNdlgygGiV2Zz9U2ciwOcEQo418qCxf+Z/3SM2PpGYH9tIACkJ1TdR3TXdsQXGZ/aRgSEA"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl03_sophie</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>5307067 Nobody To Love (Extended Mix) - 00:00</li><li>54228 Slam (Original Mix) - 03:24</li><li>12957420 Shake Ur Body (feat. Di) (Original Mix) - 08:52</li><li>15405340 Where's Your Head At (1991 Remix) - 12:17</li><li>9821492 Ruffest Gunark (Chase & Status Remix) - 15:53</li><li>3408233 No Problem (Original Mix) - 20:20</li></ol>
+        <div id="content">
+            <h1>0003 - SOPHIE</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>5307067 Nobody To Love (Extended Mix) - 00:00</li><li>54228 Slam (Original Mix) - 03:24</li><li>12957420 Shake Ur Body (feat. Di) (Original Mix) - 08:52</li><li>15405340 Where's Your Head At (1991 Remix) - 12:17</li><li>9821492 Ruffest Gunark (Chase & Status Remix) - 15:53</li><li>3408233 No Problem (Original Mix) - 20:20</li></ol>
+        </div>
+        <img id="poster" src="../../PL03_poster.jpeg">
     </body>
 </html>

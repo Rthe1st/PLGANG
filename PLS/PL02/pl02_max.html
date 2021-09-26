@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX185TSsH9HegF0QsMc0XExNbTclewxErjxCWFeKXl0dD8R3ezKEIXEP97kVJzljS5klAsGsiwflZJiuUmHyj32PHT0NDb+NbkzRO0Nh5RpdNtelmQ10tH4i2"
+            encryptedLink = "U2FsdGVkX1+Ir01U3NUIYaoUCBiNbvwx5sn84+ZFq8oNBpU+YaYUAC/UOwMoFEmDmV3KkxAHdxjbOOjjBH4f3P2422sj+9z4qJfGLjCAe0sgFQ5M2qP1Ne/HhCAS4UP7"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_max</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>smWVKR LYjs by John Holt   Police In Helicopter - 00:00</li><li>Planet Rock by Afrika Bambaataa And The Soulsonic Force - 03:36</li><li>Kraftwerk - Tour de France [Original Version, 1984] HD-LTZyXlLhvxs - 09:55</li><li>A Guy Called Gerald - Voodoo Ray (OFFICIAL MUSIC VIDEO)-j7vxHOCeiQ4 - 16:35</li><li>808 State - Pacific State-6jQ bOP0HfY - 20:52</li></ol>
+        <div id="content">
+            <h1>0002 - MAX</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>smWVKR LYjs by John Holt   Police In Helicopter - 00:00</li><li>Planet Rock by Afrika Bambaataa And The Soulsonic Force - 03:36</li><li>Kraftwerk - Tour de France [Original Version, 1984] HD-LTZyXlLhvxs - 09:55</li><li>A Guy Called Gerald - Voodoo Ray (OFFICIAL MUSIC VIDEO)-j7vxHOCeiQ4 - 16:35</li><li>808 State - Pacific State-6jQ bOP0HfY - 20:52</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>

@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX19htimV4svka4FwXyJkQqUqUi/pG0YWZ3Q1OBrl0pkTnsOyyjHDi0ikmZSjAlNV7ATW1WX12qAfbBv9yzwyq2C7KvmsSKOGiiZ4JHPYthFd6Z3jCKzTi1zq"
+            encryptedLink = "U2FsdGVkX1/cEGPRNzyxQixjKLkWkbDumuz0glZ3S3qWU7vGjax3i6Ro6HbaBSSeasnl8q8g7skMd3fnc+Ii/rgkCE8jgDsAffhNqWzhs6Ze2iKvtU9obHks8dRMwA1U"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_laura</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>Beat It [Audio HQ] HD by Michael Jackson - 00:00</li><li>Rock the Casbah (Remastered) - 01:52</li><li>Pass The Dutchie - 03:45</li><li>One In Ten (Dub Version) - 05:28</li><li>The Killing Moon (Official Music Video) by Echo & The Bunnymen - 07:21</li><li>Tainted Love - 09:45</li><li>Could You Be Loved (HQ) by Bob Marley - 10:56</li><li>Kingston Town by UB40 - 13:51</li><li>Everywhere (Official Music Video) by Fleetwood Mac - 15:03</li><li>I Want Your Love by Chic - 16:04</li></ol>
+        <div id="content">
+            <h1>0002 - LAURA</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>Beat It [Audio HQ] HD by Michael Jackson - 00:00</li><li>Rock the Casbah (Remastered) - 01:52</li><li>Pass The Dutchie - 03:45</li><li>One In Ten (Dub Version) - 05:28</li><li>The Killing Moon (Official Music Video) by Echo & The Bunnymen - 07:21</li><li>Tainted Love - 09:45</li><li>Could You Be Loved (HQ) by Bob Marley - 10:56</li><li>Kingston Town by UB40 - 13:51</li><li>Everywhere (Official Music Video) by Fleetwood Mac - 15:03</li><li>I Want Your Love by Chic - 16:04</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>

@@ -125,6 +125,7 @@
                 // img1.src = './cone_blur.png';
                 img1.onload = function () {
                     imageSetup()
+                    previousTimestamp = performance.now();
                     window.requestAnimationFrame(animate)
                 };
             }

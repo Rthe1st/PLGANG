@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+        <link rel="stylesheet" href="../../styles.css">
+        <script>
 
         function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX19pfFiJRsyC7IJl+bZdGOFqH1YOEquVXb+xrIddhMaBStNxnk5EtTxUi1AbDQlx7KcOjsbHTzUMMwgQcsGHvHoqWe+HCnTxln+D19RHV+qnShWMSZMakD16"
+            encryptedLink = "U2FsdGVkX1+5LbcgTfR2ogJ4cc31DFX776N7Fz9dfrFjq8GHEmt0N5VQoXfBuaUPT+vgWizJ8bqC7uXr94UFXNwYRhC7jjdHQsEgcJ4LMG4H/YGD7PbDe89Zb12Ptxmf"
             let decrypted;
             try{
                 decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
@@ -45,16 +46,18 @@
         </script>
     </head>
     <body>
-        <h1>pl02_sophie</h1>
-        <audio id="recording" hidden controls>
-                Your browser does not support the
-                <code>audio</code> element.
-        </audio>
-        <form id="decrypt">
-            <input id="password" type="text">
-            <button type="submit">Unlock recording</button>
-        </form>
-        <h2>Track list</h2>
-        <ol><li>Bam Bam by Sister Nancy - 00:00</li><li>Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ - 03:14</li><li>Murder She Wrote by Chaka Demus & Pliers - 06:39</li><li>The Jam - Town Called Malice (Official Video)-YfpRm-p7qlY - 10:37</li></ol>
+        <div id="content">
+            <h1>0002 - SOPHIE</h1>
+            <audio id="recording" hidden controls>
+                    Your browser does not support the
+                    <code>audio</code> element.
+            </audio>
+            <form id="decrypt">
+                <input id="password" type="text">
+                <button type="submit">Unlock recording</button>
+            </form>
+            <ol><li>Bam Bam by Sister Nancy - 00:00</li><li>Rick Astley - Never Gonna Give You Up (Official Music Video)-dQw4w9WgXcQ - 03:14</li><li>Murder She Wrote by Chaka Demus & Pliers - 06:39</li><li>The Jam - Town Called Malice (Official Video)-YfpRm-p7qlY - 10:37</li></ol>
+        </div>
+        <img id="poster" src="../../PL02_poster.jpeg">
     </body>
 </html>
