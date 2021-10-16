@@ -1,55 +1,59 @@
 body {
-    background-color: white;
-    font-family: 'Open Sans', sans-serif;
-    font-style: oblique 10deg;
-    margin: 0px;
-    color: black;
+  background-color: white;
+  font-family: "Open Sans", sans-serif;
+  font-style: oblique 10deg;
+  margin: 0px;
+  color: black;
 }
 a {
-    color: unset;
+  color: unset;
 }
 
 ul {
-    list-style: none;
-    text-align: center;
-    padding-left: 0%;
+  list-style: none;
+  text-align: center;
+  padding-left: 0%;
 }
 
 li {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 #cone {
-    width:100vw;
-    height:100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 a {
-    text-decoration:none;
+  text-decoration: none;
 }
 
 #left {
-    position: absolute;
-    /* background: linear-gradient(#ffffff, #9198e5, #e66465); */
-    background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255, 0.8), rgba(255,255,255,0));
-    /* background-colo  r: rgb(224, 224, 224); */
-    /* opacity: 0.80; */
-    left: 0; 
-    right: 0; 
-    margin-left: auto; 
-    margin-right: auto; 
-    top: 0;
-    text-align: center;
-    /* width: 50%; */
-    /* border-top-width: 2em;
+  position: absolute;
+  /* background: linear-gradient(#ffffff, #9198e5, #e66465); */
+  background: linear-gradient(
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  /* background-colo  r: rgb(224, 224, 224); */
+  /* opacity: 0.80; */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  text-align: center;
+  /* width: 50%; */
+  /* border-top-width: 2em;
     border-bottom-width: 2em; */
-    /* border-left-width: 0.2em; */
-    /* border-right-width: 0.2em; */
-    /* border-color: black; */
-    /* border-style: solid; */
-    font-size: 2em;
-    color: rgba(0, 0, 0, 0.5);
-    margin-left: auto;
-    margin-right: auto;
-    /* transform: make it a paralleogram; */
+  /* border-left-width: 0.2em; */
+  /* border-right-width: 0.2em; */
+  /* border-color: black; */
+  /* border-style: solid; */
+  font-size: 2em;
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: auto;
+  margin-right: auto;
+  /* transform: make it a paralleogram; */
 }
