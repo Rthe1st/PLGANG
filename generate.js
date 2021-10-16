@@ -28,6 +28,9 @@ function parseCue(file){
 async function generate(){
     var files = fs.readdirSync(recordingFolder);
     for(file of files){
+        // recording must look like pl{number}{name}.wav
+        // the cue file like pl{number}{name}.cue
+        // and will be put in ./PLS/PLXX/pl{number}_{name}.html
         if(file.startsWith("pl") && file.endsWith(".wav")){
             console.log(file)
             let folder = "./PLS/" + file.substring(0,4).toUpperCase()
@@ -48,6 +51,22 @@ async function generate(){
                 .replace("$trackList", parseCue(file))
                 .replace(/\$month/g, file.substring(0,4).toUpperCase())
             fs.writeFileSync(`${folder}/${file.replace(".wav", ".html")}`, data)
+        }
+        // the file pl{number}_{name}.spotify must contain a  spotify link for embedding playlists
+        if(file.startsWith("pl") && file.endsWith(".spotify")){
+            console.log(file)
+            let folder = "./PLS/" + file.substring(0,4).toUpperCase()
+            if(!fs.existsSync(folder)){
+                fs.mkdirSync(folder)
+            }
+            let spotifyLink = fs.readFileSync(recordingFolder + file, 'utf8')
+            let data = fs.readFileSync('./spotify_template.html', 'utf8')
+            let name = "00" + file.replace(".spotify", "").slice(2).replace("_", " - ").toUpperCase()
+            data = data
+                .replace("$spotifyLink", spotifyLink)
+                .replace("$name", name)
+                .replace(/\$month/g, file.substring(0,4).toUpperCase())
+            fs.writeFileSync(`${folder}/${file.replace(".spotify", ".html")}`, data)
         }
     }
 }
@@ -76,5 +95,6 @@ let rootFolder = "./PLS"
 if(!fs.existsSync(rootFolder)){
     fs.mkdirSync(rootFolder)
 }
-generate()
-folderIndexes()
+generate().then(()=>{
+    folderIndexes()
+})

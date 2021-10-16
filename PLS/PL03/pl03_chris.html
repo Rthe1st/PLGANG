@@ -1,63 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <link rel="stylesheet" href="../../styles.css">
-        <script>
+  <head>
+    <meta charset="utf-8" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"
+      integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="stylesheet" href="../../styles.css" />
+    <script>
+      function decryptRecording(password) {
+        encryptedLink = "U2FsdGVkX18wk1Kc7KfbPd4xUMeZ3LK1wZDyNYe7sDL0yuRYQYeEmWArAuW2VEdGbhrgAj6TYpg4NeoqI1R5MeEfG7ygA2tJDau+hN0FEmWjUbYgZKEPxl4WkOw83fKw";
+        let decrypted;
+        try {
+          decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(
+            CryptoJS.enc.Utf8
+          );
+        } catch {
+          decrypted = null;
+        }
+        if (
+          decrypted != null &&
+          !decrypted.startsWith("https://storage.googleapis.com/")
+        ) {
+          return null;
+        } else {
+          document.getElementById("decrypt").hidden = true;
+          window.localStorage.setItem("password", password);
+          document.getElementById("recording").src = decrypted;
+          document.getElementById("recording").hidden = false;
+          document.getElementById("recording-download").href = decrypted;
+          document.getElementById("recording-download").hidden = false;
+          return decrypted;
+        }
+      }
 
-        function decryptRecording(password){
-            encryptedLink = "U2FsdGVkX1/wAGCEjEPE6AviyDhJKao80BvCbTLTkndwt8fGmKxBQgGRybUbMx3mqGkMD68JgOmFq9JTH2Ovm3E7ZkEGIXGkznza/E1rYtrTsHZGj8OMbOFfsUetaT7a"
-            let decrypted;
-            try{
-                decrypted = CryptoJS.AES.decrypt(encryptedLink, password).toString(CryptoJS.enc.Utf8);
-            }catch{
-                decrypted = null;
-            }
-            if(decrypted != null && !decrypted.startsWith("https://storage.googleapis.com/")){
-                return null;
-            }else{
-                document.getElementById("decrypt").hidden = true;
-                window.localStorage.setItem('password', password);
-                document.getElementById("recording").src = decrypted
-                document.getElementById("recording").hidden = false
-                return decrypted;
-            }
+      function goToRecording(event) {
+        let password = document.getElementById("password").value;
+        let decryptedLink = decryptRecording(password);
+        if (decryptedLink == null) {
+          alert("wrong password");
         }
-
-        function goToRecording(event){
-            let password = document.getElementById("password").value;
-            let decryptedLink = decryptRecording(password);
-            if(decryptedLink == null){
-                alert("wrong password")
-            }
-            event.preventDefault();
+        event.preventDefault();
+      }
+      window.onload = function () {
+        let password = localStorage.getItem("password");
+        if (password != null) {
+          let decryptedLink = decryptRecording(password);
+          if (decryptedLink == null) {
+            localStorage.removeItem("password");
+          }
         }
-        window.onload = function(){
-            let password = localStorage.getItem('password');
-            if(password != null){
-                let decryptedLink = decryptRecording(password)
-                if(decryptedLink == null){
-                    localStorage.removeItem('password')
-                }
-            }
-            document.getElementById("decrypt").addEventListener('submit', goToRecording);
-        }
-        </script>
-    </head>
-    <body>
-        <div id="content">
-            <h1>0003 - CHRIS</h1>
-            <audio id="recording" hidden controls>
-                    Your browser does not support the
-                    <code>audio</code> element.
-            </audio>
-            <form id="decrypt">
-                <input id="password" type="text">
-                <button type="submit">Unlock recording</button>
-            </form>
-            <ol><li>11632572 The Lighter (Original Mix) - 00:00</li><li>5237685 Hard (Original Mix) - 03:45</li><li>9117580 Light Up (The World) (Benny Page Remix) - 07:21</li><li>40370 Original Junglesound (Switch Mix) - 10:46</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 18:00</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 24:53</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 28:49</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 29:51</li></ol>
-        </div>
-        <img id="poster" src="../../PL03_poster.jpeg">
-    </body>
+        document
+          .getElementById("decrypt")
+          .addEventListener("submit", goToRecording);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <h1>0003 - CHRIS</h1>
+      <audio id="recording" hidden controls>
+        Your browser does not support the
+        <code>audio</code> element.
+      </audio>
+      <a id="recording-download" hidden download>Download</a>
+      <form id="decrypt">
+        <input id="password" type="text" />
+        <button type="submit">Unlock recording</button>
+      </form>
+      <ol><li>11632572 The Lighter (Original Mix) - 00:00</li><li>5237685 Hard (Original Mix) - 03:45</li><li>9117580 Light Up (The World) (Benny Page Remix) - 07:21</li><li>40370 Original Junglesound (Switch Mix) - 10:46</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 18:00</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 24:53</li><li>9116798 Louder (Drumsound & Bassline Smith Remix) - 28:49</li><li>Tarantula (feat Fresh & $Pyda & Tenor Fly) by Pendulum - 29:51</li></ol>
+    </div>
+    <img id="poster" src="../../PL03_poster.jpeg" />
+  </body>
 </html>

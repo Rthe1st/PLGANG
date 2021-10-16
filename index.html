@@ -1,153 +1,173 @@
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
-    <link href="./root_style.css" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./root_style.css" rel="stylesheet" />
     <script type="text/javascript" src="dat.gui.js"></script>
     <script>
-        function subImage(){
-            let cone = document.getElementById("cone")
-            let width = cone.offsetWidth;
-            let height = cone.offsetHeight;
-            cone.width = width
-            cone.height = height
-            return [width, height]
+      function subImage() {
+        let cone = document.getElementById("cone");
+        let width = cone.offsetWidth;
+        let height = cone.offsetHeight;
+        cone.width = width;
+        cone.height = height;
+        return [width, height];
+      }
+
+      let imageData;
+      let coneWidth;
+      let coneHeight;
+      let dataCache;
+      function imageSetup() {
+        [coneWidth, coneHeight] = subImage();
+        if (coneWidth < coneHeight) {
+          let ratio = coneWidth / coneHeight;
+          ctx.drawImage(
+            img1,
+            0,
+            0,
+            img1.width * ratio,
+            img1.height,
+            0,
+            0,
+            coneWidth,
+            coneHeight
+          );
+        } else {
+          let ratio = coneHeight / coneWidth;
+          ctx.drawImage(
+            img1,
+            0,
+            0,
+            img1.width,
+            img1.height * ratio,
+            0,
+            0,
+            coneWidth,
+            coneHeight
+          );
+        }
+        imageData = ctx.getImageData(0, 0, coneWidth, coneHeight);
+        dataCache = new Uint8ClampedArray(imageData.data);
+      }
+
+      window.addEventListener("resize", function () {
+        imageSetup();
+      });
+
+      let controls = {
+        low: 0,
+        high: 52,
+        speed: 0.01,
+        threshold_lower_bound: 138,
+        threshold_upper_bound: 171,
+        same_jump_color_upper: 174,
+        same_jump_color_lower: 8,
+        noise: true,
+        noise_low: 0,
+        noise_high: 33,
+      };
+
+      let ctx;
+      let threshold = 150;
+      let forwards = true;
+      var img1 = new Image();
+
+      let previousTimestamp = performance.now();
+      let color = 0;
+      let thresholdChange = 0;
+      function animate(timestamp) {
+        let timeElapsed = timestamp - previousTimestamp;
+        previousTimestamp = timestamp;
+        thresholdChange += timeElapsed * controls.speed;
+        if (thresholdChange < 1) {
+          window.requestAnimationFrame(animate);
+          return;
+        }
+        imageData.data.set(dataCache);
+        let data = imageData.data;
+        for (var i = 0; i < data.length; i += 4) {
+          // 0 = red, 1 = green, 2 = blue
+          if (data[i + color] < threshold) {
+            data[i + color] -= Math.max(
+              controls.low * (1 - threshold / controls.threshold_upper_bound),
+              0
+            );
+          } else {
+            data[i + color] += Math.min(
+              controls.high * (1 - threshold / controls.threshold_upper_bound),
+              255
+            );
+          }
+          if (controls.noise) {
+            let color2 = Math.floor(Math.random() * 3);
+            if (data[i + color2] < threshold) {
+              data[i + color2] -= Math.max(controls.noise_low, 0);
+            } else {
+              data[i + color2] += Math.min(controls.noise_high, 255);
+            }
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+
+        let changeDirection = 1;
+        if (!forwards) {
+          changeDirection = -1;
         }
 
-        let imageData;
-        let coneWidth;
-        let coneHeight;
-        let dataCache;
-        function imageSetup(){
-            [coneWidth, coneHeight] = subImage()
-            if(coneWidth < coneHeight){
-                let ratio = coneWidth/coneHeight
-                ctx.drawImage(img1, 0, 0, img1.width * ratio, img1.height, 0, 0, coneWidth, coneHeight)
-            }else{
-                let ratio = coneHeight/coneWidth
-                ctx.drawImage(img1, 0, 0, img1.width, img1.height * ratio, 0, 0, coneWidth, coneHeight)
-            }
-            imageData = ctx.getImageData(0, 0, coneWidth, coneHeight);
-            dataCache = new Uint8ClampedArray(imageData.data)
+        threshold += changeDirection * thresholdChange;
+
+        thresholdChange -= Math.floor(thresholdChange);
+
+        if (threshold >= controls.threshold_upper_bound) {
+          color = Math.floor(Math.random() * 3);
+          forwards = false;
         }
-
-
-        window.addEventListener("resize", function() {
-            imageSetup()
-        });
-
-        let controls = {
-            low: 0,
-            high: 52,
-            speed: 0.01,
-            threshold_lower_bound: 138,
-            threshold_upper_bound: 171,
-            same_jump_color_upper: 174,
-            same_jump_color_lower: 8,
-            noise: true,
-            noise_low: 0,
-            noise_high: 33,
+        if (threshold < controls.threshold_lower_bound) {
+          forwards = true;
         }
+        window.requestAnimationFrame(animate);
+      }
 
-        let ctx;
-        let threshold = 150;
-        let forwards = true;
-        var img1 = new Image();
-
-        let previousTimestamp = performance.now();
-        let color = 0;
-        let thresholdChange = 0
-        function animate(timestamp){
-            let timeElapsed = timestamp - previousTimestamp;
-            previousTimestamp = timestamp;
-            thresholdChange += timeElapsed * controls.speed;
-            if(thresholdChange < 1){
-                window.requestAnimationFrame(animate)
-                return
-            }
-            imageData.data.set(dataCache)
-            let data = imageData.data;
-            for (var i = 0; i < data.length; i += 4) {
-                // 0 = red, 1 = green, 2 = blue
-                if(data[i+color] < threshold){
-                    data[i+color] -= Math.max(controls.low * (1-threshold/controls.threshold_upper_bound), 0);
-                }else{
-                    data[i+color] += Math.min(controls.high* (1-threshold/controls.threshold_upper_bound), 255);
-                }
-                if(controls.noise){
-                    let color2 = Math.floor(Math.random() *3)
-                    if(data[i+color2] < threshold){
-                        data[i+color2] -= Math.max(controls.noise_low, 0);
-                    }else{
-                        data[i+color2] += Math.min(controls.noise_high, 255);
-                    }
-                }
-            }
-            ctx.putImageData(imageData, 0, 0);
-
-            let changeDirection = 1;
-            if(!forwards){
-                changeDirection = -1;
-            }
-
-            threshold += changeDirection * thresholdChange;
-
-            thresholdChange -= Math.floor(thresholdChange);
-
-            if(threshold >= controls.threshold_upper_bound){
-                color = Math.floor(Math.random() *3)
-                forwards = false;
-            }
-            if(threshold < controls.threshold_lower_bound){
-                forwards = true;
-            }
-            window.requestAnimationFrame(animate)
+      window.onload = () => {
+        const gui = new dat.GUI({ closed: true });
+        gui.add(controls, "low", 0, 255);
+        gui.add(controls, "high", 0, 255);
+        gui.add(controls, "speed", 0, 0.5);
+        gui.add(controls, "threshold_upper_bound", 0, 255);
+        gui.add(controls, "threshold_lower_bound", 0, 255);
+        gui.add(controls, "noise", true);
+        gui.add(controls, "noise_low", 0, 255);
+        gui.add(controls, "noise_high", 0, 255);
+        var canvas = document.getElementById("cone");
+        if (canvas.getContext) {
+          ctx = canvas.getContext("2d");
+          img1.src = "cone_blur_small.png";
+          // img1.src = './cone_blur.png';
+          img1.onload = function () {
+            imageSetup();
+            previousTimestamp = performance.now();
+            window.requestAnimationFrame(animate);
+          };
         }
-
-        window.onload = () => {
-            const gui = new dat.GUI({closed:  true});
-            gui.add(controls, 'low', 0, 255);
-            gui.add(controls, 'high', 0, 255);
-            gui.add(controls, 'speed', 0, 0.5);
-            gui.add(controls, 'threshold_upper_bound', 0, 255);
-            gui.add(controls, 'threshold_lower_bound', 0, 255);
-            gui.add(controls, 'noise', true);
-            gui.add(controls, 'noise_low', 0, 255);
-            gui.add(controls, 'noise_high', 0, 255);
-            var canvas = document.getElementById('cone');
-            if (canvas.getContext) {
-                ctx = canvas.getContext('2d');
-                img1.src = "cone_blur_small.png";
-                // img1.src = './cone_blur.png';
-                img1.onload = function () {
-                    imageSetup()
-                    previousTimestamp = performance.now();
-                    window.requestAnimationFrame(animate)
-                };
-            }
-        }
+      };
     </script>
-</head>
+  </head>
 
-<body>
-    <!-- width="657px" height="657px" -->
+  <body>
     <canvas id="cone"></canvas>
     <div id="left">
-        <!--<div id="title">
-            <p>plgangplgangplangplgang</p>
-            <h1>PLGANG</h1>
-            <p>plgangplgangplangplgang</p>
-        </div>-->
-        <ul>
-            <li><a href="./PLS/PL02/index.html">0002</a></li>
-            <li><a href="./PLS/PL03/index.html">0003</a></li>
-        </ul>
+      <ul>
+        <li><a href="./PLS/PL02/index.html">0002</a></li>
+        <li><a href="./PLS/PL03/index.html">0003</a></li>
+        <li><a href="./PLS/PL04/index.html">0004</a></li>
+      </ul>
     </div>
-
-</body>
-
+  </body>
 </html>
